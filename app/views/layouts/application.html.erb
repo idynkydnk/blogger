@@ -10,6 +10,15 @@
 
   <body>
   	<p class="flash"><%= flash.notice %></p>
+    <div class="nav-bar">
+      <ul class="nav-ul">
+        <li class="nav-li"><%= link_to "Articles", articles_path %></li>
+        <li class="nav-li"><%= link_to "Tags", tags_path %></li>
+        <% if logged_in? %>
+          <li class="nav-li"><%= link_to 'Authors', authors_path %></li>
+        <% end %>
+      </ul>
+    </div>
 
       <%= yield %>
       <hr>
@@ -24,3 +33,4 @@
 
   </body>
 </html>
+
