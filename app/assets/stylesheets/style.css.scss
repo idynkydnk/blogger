@@ -41,20 +41,16 @@ a {
 }
 
 .nav-bar {
-  background-clip: padding-box;
   color: #fff;   
-  margin: 0 auto;
   position: absolute;
-  bottom: 0px;
   left: 0;
-  padding: 1em 1em;
-  width: 100%;
-  text-align: left;
-  border-top: 0;
+  width: 99%;
+  text-align: right;
+  bottom: 3px;
 }
 
 .nav-li {
     display:inline;
     font-size: 1em;
-    padding: 1em 1em;
+    padding-right: .5em;
 }
