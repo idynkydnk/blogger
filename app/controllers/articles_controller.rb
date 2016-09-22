@@ -18,6 +18,7 @@ class ArticlesController < ApplicationController
 
 	def create
 		@article = Article.new(article_params)
+		@article.user = current_user.email
   		@article.save
   		flash.notice = "Article '#{@article.title}' was Saved!"
   		redirect_to article_path(@article)
@@ -25,19 +26,29 @@ class ArticlesController < ApplicationController
 
 	def destroy
 		@article = Article.find(params[:id])
-		@article.destroy
-		flash.notice = "Article '#{@article.title}' has been Deleted!"
-		redirect_to articles_path
+		if @article.user == current_user.email
+			@article.destroy
+			flash.notice = "Article '#{@article.title}' has been deleted!"
+			redirect_to articles_path
+		else
+			flash.notice = "Article '#{@article.title}' was not deleted. You can only delete your own articles."
+			redirect_to articles_path
+		end
 	end
 
 	def edit
-		@article = Article.find(params[:id])
+			@article = Article.find(params[:id])
 	end
 
 	def update
 		@article = Article.find(params[:id])
-  		@article.update(article_params)
-  		flash.notice = "Article '#{@article.title}' Updated!"
-		redirect_to article_path(@article)
+		if @article.user == current_user.email
+  			@article.update(article_params)
+  			flash.notice = "Article '#{@article.title}' Updated!"
+			redirect_to article_path(@article)
+		else
+			flash.notice = "Article '#{@article.title}' was not updated. You can only edit your own articles."
+			redirect_to articles_path
+		end
 	end
 end
