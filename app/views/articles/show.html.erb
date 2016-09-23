@@ -1,9 +1,12 @@
-<h1><%= @article.title %></h1>
+<h1> <%= @article.title %> </h1>
+
 <p>
   Tags:
   <% @article.tags.each do |tag| %>
     <%= link_to tag.name, tag_path(tag) %>
   <% end %>
+  <br>
+  <br>
 </p>
 <p>
 	<% if @article.image.exists? %>
@@ -20,8 +23,9 @@
 
 <%= link_to "<< Back to Articles List", articles_path %>
 
-
 <% if logged_in? %>
 	<%= link_to "Delete", article_path(@article), method: :delete, data: {confirm: "Really delete the article?"} %>
 	<%= link_to "Edit", edit_article_path(@article) %>
 <% end %>
+
+<p class="counter"><%=  @article.view_count %> views  </p>
